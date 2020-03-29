@@ -82,19 +82,19 @@ sysctl -w vm.drop_caches=3
 
 Foram executadas várias rodadas de testes, os resultados de tempo de execução eram inseridos juntamente aos comandos de limpeza de cache, para que a alta repetição dos comandos não intereferisse no resultado do experimento. No total foram executados 166 rodadas para cada binário, abaixo vemos o resultado do cpu_bound. As medidas estatísticas análisadas foram: média aritmética, percentil 99 (com o objetivo de eliminar outliers) e o desvio padrão dos elementos da amostra.
 
-|      | media    | p99      | desvpad  |   |
-|------|----------|----------|----------|---|
-| real | 0m0.003s | 0m0.005s | 0m0.001s |   |
-| user | 0m0.005s | 0m0.005s | 0m0.001s |   |
-| sys  | 0m0.001s | 0m0.000s | 0m0.001s |   |
+|      | media    | p99      | desvpad  |
+|------|----------|----------|----------|
+| real | 0m0.003s | 0m0.005s | 0m0.001s |
+| user | 0m0.005s | 0m0.005s | 0m0.001s |
+| sys  | 0m0.001s | 0m0.000s | 0m0.001s |
 
 Os valores do binário io_bound seguiram os mesmo critérios de avaliação, e podem ser observador na tabela abaixo.
 
-|      | media    | p99      | desvpad  |   |
-|------|----------|----------|----------|---|
-| real | 0m0.248s | 0m0.230s | 0m0.127s |   |
-| user | 0m0.186s | 0m0.170s | 0m0.007s |   |
-| sys  | 0m0.023s | 0m0.019s | 0m0.008s |   |
+|      | media    | p99      | desvpad  |
+|------|----------|----------|----------|
+| real | 0m0.248s | 0m0.230s | 0m0.127s |
+| user | 0m0.186s | 0m0.170s | 0m0.007s |
+| sys  | 0m0.023s | 0m0.019s | 0m0.008s |
 
 
 Paralelamente, fizemos outra análise utilizando o mesmo comando, porém a chamada é de outra forma.
