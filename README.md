@@ -105,24 +105,24 @@ O comando /usr/bin/time é executado em tempo real do GNU Linux.
 Alguns parametros adicionais foram passando na execução do comando para facilitar a extração e análise das informações.
 
 ```
-/usr/bin/time --format="Uso de %P da CPU\n%Ss em modo kernel\n%Us em modo usurio\n%c Trocas de contexto involuntarias\n%w Trocas de contexto vontunarias" ./bin
+/usr/bin/time --format="Uso de %P da CPU\n%Ss\ em modo kernel\n%Us em modo usurio\n%c\ Trocas de contexto involuntarias\n%w Trocas de contexto vontunarias" ./bin
 ```
 
 Para o binário cpu_bound temos:
 
-Uso de 90% da CPU
-0.00s em modo kernel
-0.00s em modo usurio
-5 Trocas de contexto involuntárias
-1 Trocas de contexto voluntárias
+Uso de 90% da CPU\
+0.00s em modo kernel\
+0.00s em modo usurio\
+5 Trocas de contexto involuntárias\
+1 Trocas de contexto voluntárias\
 
 Para o binário io_bound temos:
 
-Uso de 99% da CPU
-0.01s em modo kernel
-0.19s em modo usurio
-20 Trocas de contexto involuntárias
-1 Trocas de contexto voluntárias
+Uso de 99% da CPU\
+0.01s em modo kernel\
+0.19s em modo usurio\
+20 Trocas de contexto involuntárias\
+1 Trocas de contexto voluntárias\
 
 
 Referências
