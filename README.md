@@ -51,7 +51,7 @@ No trecho do código processo.c, temos a chama de sistema ***fork()***.
 
 Na análise do binário utilizando o Strace, a chamada de sistema fork() não aparece como uma chamada dentro do log do Strace. 
 
-Ocorre que, a chamada fork() quando escrita na linguagem C, utiliza a biblioteca glibc, que por sua vez implementa o fork() como um wrapper da chamada de sistema Clone, que podem ser observadas abaixo.
+Ocorre que, a chamada fork() quando escrita na linguagem C, utiliza a biblioteca glibc [3], que por sua vez implementa o fork() como um wrapper da chamada de sistema Clone, que podem ser observadas abaixo.
 
 ![stats](/assets/process-ana.png)
 
@@ -105,8 +105,10 @@ O comando /usr/bin/time é executado em tempo real do GNU Linux.
 Alguns parametros adicionais foram passando na execução do comando para facilitar a extração e análise das informações.
 
 ```
-/usr/bin/time --format="Uso de %P da CPU\n%Ss\ em modo kernel\n%Us em modo usurio\n%c\ Trocas de contexto involuntarias\n%w Trocas de contexto vontunarias" ./bin
+/usr/bin/time --format="Uso de %P da CPU\n%Ss em modo kernel\n%Us em modo usuário\n%c Trocas de contexto involuntárias\n%w Trocas de contexto voluntárias" ./io_bound
 ```
+Em sistemas operacionais, uma troca de contexto é o processo que consiste em armazenar e restaurar o estado (contexto) de uma CPU de forma que múltiplos processos possam compartilhar a mesma CPU. Garante-se que, quando o contexto anterior armazenado seja restaurado, o ponto de execução volte ao mesmo estado que foi deixado durante o armazenamento.
+
 
 Para o binário cpu_bound temos:
 
@@ -114,7 +116,7 @@ Uso de 90% da CPU\
 0.00s em modo kernel\
 0.00s em modo usurio\
 5 Trocas de contexto involuntárias\
-1 Trocas de contexto voluntárias\
+1 Trocas de contexto voluntárias
 
 Para o binário io_bound temos:
 
@@ -122,13 +124,14 @@ Uso de 99% da CPU\
 0.01s em modo kernel\
 0.19s em modo usurio\
 20 Trocas de contexto involuntárias\
-1 Trocas de contexto voluntárias\
+1 Trocas de contexto voluntárias
 
 
 Referências
 -------------------
-[1] http://man7.org/linux/man-pages/man1/strace.1.html\
-[2] https://gcc.gnu.org/
+1. http://man7.org/linux/man-pages/man1/strace.1.html
+2. https://gcc.gnu.org/
+3. https://thorstenball.com/blog/2014/06/13/where-did-fork-go/
 
 Contatos 
 -------------------
