@@ -80,7 +80,7 @@ echo 3 > /proc/sys/vm/drop_caches
 sysctl -w vm.drop_caches=3
 ```
 
-Foram executadas várias rodadas de testes, os resultados de tempo de execução eram inseridos juntamente aos comandos de limpeza de cache, para que a alta repetição dos comandos não intereferisse no resultado do experimento. No total foram executados 166 rodadas para cada binário, abaixo vemos o resultado do cpu_bound.
+Foram executadas várias rodadas de testes, os resultados de tempo de execução eram inseridos juntamente aos comandos de limpeza de cache, para que a alta repetição dos comandos não intereferisse no resultado do experimento. No total foram executados 166 rodadas para cada binário, abaixo vemos o resultado do cpu_bound. As medidas estatísticas análisadas foram: média aritmética, percentil 99 (com o objetivo de eliminar outliers) e o desvio padrão dos elementos da amostra.
 
 |      | media    | p99      | desvpad  |   |
 |------|----------|----------|----------|---|
@@ -97,7 +97,32 @@ Os valores do binário io_bound seguiram os mesmo critérios de avaliação, e p
 | sys  | 0m0.023s | 0m0.019s | 0m0.008s |   |
 
 
+Paralelamente, fizemos outra análise utilizando o mesmo comando, porém a chamada é de outra forma.
+Quando executa o comando time, um comando shell incorporado [e executado, e esse comando não suporta todos os recursos.
 
+O comando /usr/bin/time é executado em tempo real do GNU Linux.
+
+Alguns parametros adicionais foram passando na execução do comando para facilitar a extração e análise das informações.
+
+```
+/usr/bin/time --format="Uso de %P da CPU\n%Ss em modo kernel\n%Us em modo usurio\n%c Trocas de contexto involuntarias\n%w Trocas de contexto vontunarias" ./bin
+```
+
+Para o binário cpu_bound temos:
+
+Uso de 90% da CPU
+0.00s em modo kernel
+0.00s em modo usurio
+5 Trocas de contexto involuntárias
+1 Trocas de contexto voluntárias
+
+Para o binário io_bound temos:
+
+Uso de 99% da CPU
+0.01s em modo kernel
+0.19s em modo usurio
+20 Trocas de contexto involuntárias
+1 Trocas de contexto voluntárias
 
 
 Referências
