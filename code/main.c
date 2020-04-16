@@ -23,8 +23,6 @@ void * consume(void * arg) {
 		//pthread_mutex_unlock(getSemaphore(l,EMPTY));
 		sem_post(getSemaphore(l,EMPTY));
 		fprintf(logfile, "Removed %d from buffer\n", item);
-		//int value;
-		//fprintf(logfile, "nº empty slots: %d\n", sem_getvalue(getSemaphore(l,EMPTY), &value));
 	}
 }
 
@@ -40,8 +38,6 @@ void * produce(void * arg) {
 		//pthread_mutex_unlock(getSemaphore(l,FULL));
 		sem_post(getSemaphore(l,FULL));
 		fprintf(logfile, "Inserted %d in buffer\n", item);
-		//int value;
-		//fprintf(logfile, "nº full slots: %d\n", sem_getvalue(getSemaphore(l,FULL), &value));
 	}
 }
 
