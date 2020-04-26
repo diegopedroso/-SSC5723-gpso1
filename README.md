@@ -32,17 +32,6 @@ Se o semáforo estiver com o valor zero e existir algum processo em espera, um p
 A solução desse problema utilizou a biblioteca **pthreads** [3], a qual possibilita a programação de forma concorrente com as funções de: controle de threads, criação de threads, suspensão de threads, execução e controle de exclusão mútua por semáforos binários, para controle da seção crítica. 
 
 
-***Requisitos da Solução***
--------------------
-
-1. O programa possui um buffer limitado, acessível a qualquer processo decorrente do processo principal;
-2. O programa possui uma fila apontando para o próximo endereço livre, a ser escrito;
-3. O programa possui uma fila apontando para o próximo endereço ocupado, a ser lido e liberado;
-4. O programa consegue controlar as seções críticas (Compartilhamento de memória), para que não haja acessos indevidos.
-5. O programa possui a capacidade de colocar um processo em modo de espera;
-6. O programa possui a capacidade de controlar quando um processo está em espera, para poder "chamar" o mesmo;
-7. O programa controla quantos endereços estão livres e quantos endereços estão ocupados.
-
 ***Compartilhamento de Buffer***
 -------------------
 
