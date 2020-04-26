@@ -32,21 +32,10 @@ Se o semáforo estiver com o valor zero e existir algum processo em espera, um p
 A solução desse problema utilizou a biblioteca **pthreads** [3], a qual possibilita a programação de forma concorrente com as funções de: controle de threads, criação de threads, suspensão de threads, execução e controle de exclusão mútua por semáforos binários, para controle da seção crítica. 
 
 
-***Requisitos da Solução***
--------------------
-
-1. O programa possui um buffer limitado, acessível a qualquer processo decorrente do processo principal;
-2. O programa possui uma fila apontando para o próximo endereço livre, a ser escrito;
-3. O programa possui uma fila apontando para o próximo endereço ocupado, a ser lido e liberado;
-4. O programa consegue controlar as seções críticas (Compartilhamento de memória), para que não haja acessos indevidos.
-5. O programa possui a capacidade de colocar um processo em modo de espera;
-6. O programa possui a capacidade de controlar quando um processo está em espera, para poder "chamar" o mesmo;
-7. O programa controla quantos endereços estão livres e quantos endereços estão ocupados.
-
 ***Compartilhamento de Buffer***
 -------------------
 
-Para controlarmos o acesso a essas variáveis e garantir o sincronismo nas operações, vamos foram utilizados semáforos [1].
+Para controlarmos o acesso a essas variáveis e garantir o sincronismo nas operações, foram utilizados semáforos [1].
 
 Na criação do buffer no arquivo (lista.h) 
 
@@ -66,14 +55,14 @@ Basicamente 3 parâmetros precisam ser fornecidos, são eles:
 3. Número de threads Consumidores
 
 
-O programa inicializa com o buffer vazio, se alguma thread tentar entrar na região crítica será bloqueada pelo semáforo, umas vez que não ha nada no buffer e nada pode ser consumido.
-Apenas então quando o primeiro Produtor inserir algum dado no buffer, a thread associada vai passar de dow para up. Podendo ou não ser escalonadas.
+O programa inicializa com o buffer vazio, se alguma thread consumidora tentar entrar na região crítica será bloqueada pelo semáforo, umas vez que não ha nada no buffer e nada pode ser consumido.
+Apenas então quando o primeiro Produtor inserir algum dado no buffer, o semáforo associado, FULL, vai ser incrementado e threads consumidoras que estavam bloqueadas vão para o estado de pronto, podendo ou não ser escalonadas logo em seguida.
 
 Os semáforos atuam apenas nas threads produtoras e consumidoras, a thread main não é afetada. 
 
-Através da função pthread_join permite que a thread main aguarde o termino das outras threads (consumidor e produtor). Essa função também permite que a thread não seja escalonada para main, e finalize todos os processos e as threads associadas a estes processos.
+Através da função pthread_join permite que a thread main aguarde o termino das outras threads (consumidor e produtor). Essa função também permite que a thread não seja escalonada para main, e finalize todos os processos e as threads associadas a esses processos.
 
-Caso o buffer fosse inicializado de forma oposta, ou seja, cheio. Se a primeira thread fosse um produtor, iria tentar inserir algum dado, e seria bloqueado pelo semáforo pelo fato do buffer estar cheio. Teria que aguardar então o escalonamento de um Consumidor que iria remover um elemento do buffer.
+Caso o buffer fosse inicializado de forma oposta, ou seja, cheio. Se a primeira thread fosse um produtor, iria tentar inserir algum dado, e seria bloqueado pelo semáforo pelo fato de o buffer estar cheio. Teria que aguardar então o escalonamento de um Consumidor que iria remover um elemento do buffer.
 
 
 Referências
