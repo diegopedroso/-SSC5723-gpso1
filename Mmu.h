@@ -10,12 +10,13 @@ public:
     int pageSize;
     int logicalAddressSize;
     int physicalMemorySize;
-    int virtualMemorySize;
+    // int virtualMemorySize;
     int virtualPageNumberBits;
 
-    std::vector<Page> virtualMemory;
+    Page * physicalMemory;
 
     MMU(int pageSize, int logicalAddressSize, int physicalMemorySize);
+    ~MMU();
     bool find(std::string virtualAddress);
     void replace(std::string virtualAddress);
 

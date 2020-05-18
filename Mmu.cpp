@@ -8,35 +8,44 @@ MMU::MMU(int pageSize, int logicalAddressSize, int physicalMemorySize) {
     this->physicalMemorySize = physicalMemorySize;
 
     this->virtualPageNumberBits = int (logicalAddressSize - log2(pageSize));
-    this->virtualMemorySize = int (pow(2, virtualPageNumberBits));
-    virtualMemory.resize(virtualMemorySize);
+    // this->virtualMemorySize = int (pow(2, virtualPageNumberBits));
+    // physicalMemory.resize(physicalMemorySize);
+    this->physicalMemory = new Page[physicalMemorySize];
+}
+
+MMU::~MMU() {
+    delete []physicalMemory;
 }
 
 bool MMU::find(std::string virtualAddress) {
-    int virtualPageNumber = std::stoi(virtualAddress.substr(0, virtualPageNumberBits), nullptr, 2);
-    if(virtualMemory[virtualPageNumber].number != -1) {
-        std::cout << "Page " << virtualPageNumber << " found!\n";
-        return true;
-    } else {
-        std::cout << "Page fault " << virtualPageNumber << "!\n";
-        return false;
+    int pageNumber = std::stoi(virtualAddress.substr(0, virtualPageNumberBits), nullptr, 2);
+    for(int i = 0; i < physicalMemorySize; ++i) {
+        if(physicalMemory[i].number == pageNumber) {
+            std::cout << "Page " << pageNumber << " found!\n";
+            physicalMemory[i].secondChance = true;
+            return true;
+        }
     }
+    std::cout << "Page fault " << pageNumber << "!\n";
+    return false;
 }
 
 void MMU::replace(std::string virtualAddress) {
-    secondChance(std::stoi(virtualAddress.substr(virtualPageNumberBits+1), nullptr, 2));
+    int pageNumber = std::stoi(virtualAddress.substr(0, virtualPageNumberBits), nullptr, 2);
+    secondChance(pageNumber);
 }
 
 void MMU::secondChance(int key) {
     static int pointer = 0;
     // static bool * secondChances = new bool[virtualMemorySize];
     while(true) {
-        if(!virtualMemory[pointer].secondChance) {
-            virtualMemory[pointer].number = key;
-            pointer = (pointer + 1) % virtualMemorySize;
+        if(!physicalMemory[pointer].secondChance) {
+            physicalMemory[pointer].number = key;
+            physicalMemory[pointer].secondChance = true;
+            pointer = (pointer + 1) % physicalMemorySize;
             return;
         }
-        virtualMemory[pointer].secondChance = false;
-        pointer = (pointer + 1) % virtualMemorySize;
+        physicalMemory[pointer].secondChance = false;
+        pointer = (pointer + 1) % physicalMemorySize;
     }
 }

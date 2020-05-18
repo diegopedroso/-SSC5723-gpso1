@@ -26,5 +26,9 @@ int main() {
         if(!mmu.find(address)) {
             mmu.replace(address);
         }
+        for(int i = 0; i < physicalMemorySize; ++i)
+            std::cout << "Page " << mmu.physicalMemory[i].number << ": " << mmu.physicalMemory[i].secondChance << '\n';
     }
+
+    system("pause");
 }

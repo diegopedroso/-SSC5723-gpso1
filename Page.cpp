@@ -6,5 +6,5 @@ Page::Page(int number) {
 
 Page::Page() {
     this->number = -1;
-    this->secondChance = true;
+    this->secondChance = false;
 }
