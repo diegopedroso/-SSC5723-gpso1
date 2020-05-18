@@ -2,6 +2,7 @@
 
 Page::Page(int number) {
     this->number = number;
+    this->secondChance = false;
 }
 
 Page::Page() {
