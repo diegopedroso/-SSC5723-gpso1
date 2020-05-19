@@ -11,7 +11,8 @@ int main() {
     int pageSize = std::stoi(props.getValue("page_size")[0]);
     int logicalAddressSize = std::stoi(props.getValue("logical_adress_size")[0]);
     int physicalMemorySize = std::stoi(props.getValue("physical_memory_size")[0]);
-    MMU mmu(pageSize, logicalAddressSize, physicalMemorySize);
+    int algorithm = props.getValue("replacement_algorithm")[0].compare("lru") ? SECOND_CHANCE : LRU;
+    MMU mmu(pageSize, logicalAddressSize, physicalMemorySize, algorithm);
 
     // Simulating the simulation file
     std::ifstream file("simulation.txt");
@@ -26,8 +27,13 @@ int main() {
         if(!mmu.find(address)) {
             mmu.replace(address);
         }
-        for(int i = 0; i < physicalMemorySize; ++i)
-            std::cout << "Page " << mmu.physicalMemory[i].number << ": " << mmu.physicalMemory[i].secondChance << '\n';
+        for(int i = 0; i < physicalMemorySize; ++i) {
+            std::cout << "Page " << mmu.physicalMemory[i].number << ": ";
+            if(mmu.replacementAlgorithm == LRU)
+                cout << "Counter: " << mmu.physicalMemory[i].accessTime << '\n';
+            else
+                cout << "Second chance bit: " << mmu.physicalMemory[i].secondChance << '\n';
+        }
     }
 
     system("pause");

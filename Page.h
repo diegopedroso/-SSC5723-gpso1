@@ -4,9 +4,12 @@
 class Page {
 public:
     int number;
+    int accessTime;
     bool secondChance;
-    Page(int number);
+
     Page();
+    Page(int number);
+    Page(int number, int time);
 };
 
 #endif
