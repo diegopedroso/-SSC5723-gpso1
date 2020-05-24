@@ -47,6 +47,114 @@ Exemplo do simulador em execução:
 ````
 $ ./main
 ````
+Saída para a configuração e simulação dada no repositório.
+````
+------------------------------------------------------------
+Replacement algorithm: LRU
+Page size (in bits): 4096
+Physical memory size (in pages): 4
+Swap area size (in pages): 8
+Logical address size (in bits): 16
+------------------------------------------------------------
+P1 C 2
+
+Process 1 created successfully
+------------------------------------------------------------
+P1 R 0010000000000000
+
+Process 1 accessing memory at 0010000000000000
+Page fault 2!
+------------------------------------------------------------
+P1 R 0101001000000000
+
+Process 1 accessing memory at 0101001000000000
+Page fault 5!
+------------------------------------------------------------
+P1 P 0010000100010000
+
+Process 1 running instruction at 0010000100010000
+Page 2 found!
+------------------------------------------------------------
+P1 R 0001000000000010
+
+Process 1 accessing memory at 0001000000000010
+Page fault 1!
+------------------------------------------------------------
+P1 P 0101000000000010
+
+Process 1 running instruction at 0101000000000010
+Page 5 found!
+------------------------------------------------------------
+P1 W 0010001000000000
+
+Process 1 accessing memory at 0010001000000000
+Page 2 found!
+------------------------------------------------------------
+P7 C 3
+
+Process 7 created successfully
+------------------------------------------------------------
+P7 R 0100011111111111
+
+Process 7 accessing memory at 0100011111111111
+Page fault 4!
+------------------------------------------------------------
+P7 R 0101001100100000
+
+Process 7 accessing memory at 0101001100100000
+Page 5 found!
+------------------------------------------------------------
+P7 I 1111000000000010
+
+Process 7 accessing device 61442
+------------------------------------------------------------
+P7 R 0011001100100001
+
+Process 7 accessing memory at 0011001100100001
+Page fault 3!
+Page 1 removed from RAM
+------------------------------------------------------------
+P7 W 0010100000000000
+
+Process 7 accessing memory at 0010100000000000
+Page 2 found!
+------------------------------------------------------------
+P1 R 0101000000000011
+
+Process 1 accessing memory at 0101000000000011
+Page 5 found!
+------------------------------------------------------------
+P1 R 0010000000000100
+
+Process 1 accessing memory at 0010000000000100
+Page 2 found!
+------------------------------------------------------------
+P1 W 1111010000000001
+
+Process 1 accessing memory at 1111010000000001
+Page fault 15!
+Page 4 removed from RAM
+------------------------------------------------------------
+P1 W 1001010000000010
+
+Process 1 accessing memory at 1001010000000010
+Page fault 9!
+Page 3 removed from RAM
+------------------------------------------------------------
+P1 P 0101111111111111
+
+Process 1 running instruction at 0101111111111111
+Page 5 found!
+------------------------------------------------------------
+P2 C 4
+
+Process 2 created successfully
+------------------------------------------------------------
+P3 C 4
+
+Memory is full! Process could not be created!
+Aborting...
+````
 
 Referências
 -------------------
