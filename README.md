@@ -22,11 +22,10 @@ Exclusivamente para esse módulo, utilizamos a linguagem C++ para conter o exces
 
 No arquivo **Properties.h** temos a classe *Properties* para ler o arquivo de configuração da MMU e extrair os valores para o construtor da classe MMU.
 
-<<<<<<< HEAD
 No arquivo **Mmu.h** define e classe implementada dentro do arquivo **Mmu.cpp**, na qual a Unidade de Gerenciamento de Memória é desenvolvida. Esse componente traduz endereços virtuais em endereços físicos. A memória principal está separada entre a memória física e a memória lógica. Na primeira,a memória é implementada em circuitos digitais e é nela que a memória lógica é fisicamente armazenada, geralmente a memória lógica é maior do que a memória física. 
 
 O simulador faz leitura do arquivo **simulation** linha a linha, coletando endereços de memória (binários) e são feitos os acessos de página, partindo do princípio que as páginas estão vazias, por esse motivo ocorre page fault nas primeiras páginas. Os tipos de acesso que interpretados pelo simulador são de escrita (W) e leitura (R).
-=======
+
 O simulador faz leitura do arquivo **simulation.txt** linha a linha, coletando endereços de memória (binários) e são feitos os acessos de página, partindo do princípio que as páginas estão ausentes, por esse motivo ocorre falta de página nas primeiros acessos às páginas. Os tipos de acesso interpretados pelo simulador são de escrita em um endereço (W), leitura em um endereço (R), execução de uma instrução em um endereço (I) e acesso a um dispositivo de E/S.
 
 Vale lembrar que uma falta de página, no contexto de gerenciamento de memória, é uma interrupção disparada pelo hardware quando um programa acessa uma página mapeada no espaço de memória virtual, mas que não foi carregada na memória física do computador.
