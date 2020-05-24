@@ -22,6 +22,8 @@ Exclusivamente para esse módulo, utilizamos a linguagem C++ para conter o exces
 
 No arquivo **Properties.h** temos a classe *properties* para ler o arquivo de configuração da MMU e extrair os valores para o construtor na classe MMU.
 
+No arquivo **Mmu.h** define e classe implementada dentro do arquivo **Mmu.cpp**, na qual a Unidade de Gerenciamento de Memória é desenvolvida. Esse componente traduz endereços virtuais em endereços físicos. A memória principal está separada entre a memória física e a memória lógica. Na primeira,a memória é implementada em circuitos digitais e é nela que a memória lógica é fisicamente armazenada, geralmente a memória lógica é maior do que a memória física. 
+
 O simulador faz leitura do arquivo **simulation** linha a linha, coletando endereços de memória (binários) e são feitos os acessos de página, partindo do princípio que as páginas estão vazias, por esse motivo ocorre page fault nas primeiras páginas. Os tipos de acesso que interpretados pelo simulador são de escrita (W) e leitura (R).
 
 Vale lembrar que, uma falta de página ou page fault, no contexto de gerenciamento de memória, é uma interrupçã disparada pelo hardware quando um programa acessa uma página mapeada no espaço de memória virtual, mas que não foi carregada na memória física do computador.
@@ -34,9 +36,57 @@ No arquivo **config.cfc** os parâmetros ***“page_size”***, ***“logical_ad
 
 O simulador ainda exibe os eventos na memória principal na memória secundária, bem como a tabela de páginas associada e as ocorrências de falta de página.
 
-Para compilar os códigos utilizou-se o comando:
+Para compilar os códigos utilizamos o compilador ***g++***[2] através do comando:
 ````
-gcc code.c -o bin_name
+$ g++ *.cpp -o main
+````
+Exemplo do simulador em execução:
+
+````
+$ ./main
+````
+
+````
+ Page fault: 0!
+Page 0: Counter: 0
+Page -1: Counter: -1
+ Page 0 found!
+Page 0: Counter: 1
+Page -1: Counter: -1
+ Page fault: 3!
+Page 0: Counter: 1
+Page 3: Counter: 2
+ Page fault: 1!
+Page 1: Counter: 3
+
+#include <iostream>
+Page 3: Counter: 2
+ Page fault: 2!
+Page 1: Counter: 3
+Page 2: Counter: 4
+ Page 2 found!
+Page 1: Counter: 3
+Page 2: Counter: 5
+ Page fault: 3!
+Page 3: Counter: 6
+Page 2: Counter: 5
+
+# page_size in bits
+ Page fault: 0!
+Page 3: Counter: 6
+Page 0: Counter: 7
+ Page 0 found!
+Page 3: Counter: 6
+Page 0: Counter: 8
+ Page 0 found!
+Page 3: Counter: 6
+Page 0: Counter: 9
+ Page fault: 2!
+Page 2: Counter: 10
+Page 0: Counter: 9
+P1 W 10001 Page 2 found!
+Page 2: Counter: 11
+Page 0: Counter: 9
 ````
 
 
@@ -46,9 +96,8 @@ gcc code.c -o bin_name
 
 Referências
 -------------------
-1. http://www.inf.ufes.br/~zegonc/material/Sistemas_Operacionais
-2. 
-3.
+1. www.inf.ufes.br/~zegonc/material/Sistemas_Operacionais
+2. www.geeksforgeeks.org/compiling-with-g-plus-plus/
 
 Contatos 
 -------------------
