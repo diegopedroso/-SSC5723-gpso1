@@ -3,9 +3,9 @@
 
 class Page {
 public:
-    int number;
-    int accessTime;
-    bool secondChance;
+    int number;         // page number
+    int accessTime;     // for LRU algorithm
+    bool secondChance;  // for Clock algorithm
 
     Page();
     Page(int number);
