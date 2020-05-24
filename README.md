@@ -26,13 +26,13 @@ O simulador faz leitura do arquivo **simulation.txt** linha a linha, coletando e
 
 Vale lembrar que uma falta de página, no contexto de gerenciamento de memória, é uma interrupção disparada pelo hardware quando um programa acessa uma página mapeada no espaço de memória virtual, mas que não foi carregada na memória física do computador.
 
-Toda vez que uma instrução é lida, exibe-se a página caso ela seja encontrada, caso contrário é disparado o page fault. Após cada nova instrução de acesso a memória, o simulador exibe o estados das páginas que estão na memória física, exibe o número da página, o valor booleano (TRUE | FALSE) do algoritmo segunda change, ou o tempo de acesso, implementado através do algoritmo LRU (Least Recently Used), que funciona como uma espécie de "idade" para cada página.
+Toda vez que uma instrução é lida, exibe-se a página caso ela seja encontrada, caso contrário é disparado o page fault. Nesse caso, caso a memória física esteja cheia, a página que foi escolhida pelo algoritmo de substituição de páginas para sair da RAM é exibida e a nova é carregada do disco para a memória.
 
 O algoritmo LRU [1] implementa um contador C de 64 bits incrementado a cada instrução (em hardware), cada entrada da tabela de páginas deve ter um campo extra para armazenar o valor do contador (campo C). A cada referência à memória o valor corrente de C é armazenado na entrada da tabela de páginas na posição correspondente à página referenciada. Quando ocorre um Page Fault, a tabela de páginas é examinada, a entrada cujo campo C é de menor valor é a escolhida.
 
-No arquivo **config.cfc** os parâmetros ***“page_size”***, ***“logical_adress_size”***,***“physical_memory_size”*** e ***“replacement_algorithm”*** são fornecidos. Na paginação a memória física é dividida em blocos de bytes contíguos denominados molduras de páginas, geralmente com tamanho de 4 KiB. Por exemplo, se o usuário desejar o valor default dos blocos o parâmetro ***page_size***  deve ser igual a 4096 (2^12).
+No arquivo **config.cfg** os parâmetros ***“page_size”***, ***“logical_adress_size”***,***“physical_memory_size”***, ***“replacement_algorithm”*** e ***“swap_size”*** são fornecidos. Na paginação a memória física é dividida em blocos de bytes contíguos denominados molduras de páginas, geralmente com tamanho de 4 KiB. Por exemplo, se o usuário desejar o valor default dos blocos o parâmetro ***page_size***  deve ser igual a 4096 (2^12).
 
-O simulador ainda exibe os eventos na memória principal na memória secundária, bem como a tabela de páginas associada e as ocorrências de falta de página.
+Além de instruções de acesso a memória e dispositivos, há também a de criação de processos. Nesse caso, o simulador checará se há espaço disponível para a sua devida alocação, ou seja, se há espaço na RAM ou se algum processo pode ser movido para a área de swap. Caso contrário, o processo não é criado e a simulação é abortada.
 
 Para compilar os códigos utilizou-se o comando:
 ````
