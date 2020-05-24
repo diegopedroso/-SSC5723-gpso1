@@ -20,11 +20,11 @@ Todas os elementos apresentados pelo autores neste trabalho forem criados e test
 
 Exclusivamente para esse módulo, utilizamos a linguagem C++ para conter o excesso de estrutuda de dados que teriam de ser implementadas na linguagem C.
 
-No arquivo **Properties.h** temos a classe *properties* para ler o arquivo de configuração da MMU e extrair os valores para o construtor na classe MMU.
+No arquivo **Properties.h** temos a classe *Properties* para ler o arquivo de configuração da MMU e extrair os valores para o construtor da classe MMU.
 
-O simulador faz leitura do arquivo **simulation** linha a linha, coletando endereços de memória (binários) e são feitos os acessos de página, partindo do princípio que as páginas estão vazias, por esse motivo ocorre page fault nas primeiras páginas. Os tipos de acesso que interpretados pelo simulador são de escrita (W) e leitura (R).
+O simulador faz leitura do arquivo **simulation.txt** linha a linha, coletando endereços de memória (binários) e são feitos os acessos de página, partindo do princípio que as páginas estão ausentes, por esse motivo ocorre falta de página nas primeiros acessos às páginas. Os tipos de acesso interpretados pelo simulador são de escrita em um endereço (W), leitura em um endereço (R), execução de uma instrução em um endereço (I) e acesso a um dispositivo de E/S.
 
-Vale lembrar que, uma falta de página ou page fault, no contexto de gerenciamento de memória, é uma interrupçã disparada pelo hardware quando um programa acessa uma página mapeada no espaço de memória virtual, mas que não foi carregada na memória física do computador.
+Vale lembrar que uma falta de página, no contexto de gerenciamento de memória, é uma interrupção disparada pelo hardware quando um programa acessa uma página mapeada no espaço de memória virtual, mas que não foi carregada na memória física do computador.
 
 Toda vez que uma instrução é lida, exibe-se a página caso ela seja encontrada, caso contrário é disparado o page fault. Após cada nova instrução de acesso a memória, o simulador exibe o estados das páginas que estão na memória física, exibe o número da página, o valor booleano (TRUE | FALSE) do algoritmo segunda change, ou o tempo de acesso, implementado através do algoritmo LRU (Least Recently Used), que funciona como uma espécie de "idade" para cada página.
 
@@ -36,7 +36,7 @@ O simulador ainda exibe os eventos na memória principal na memória secundária
 
 Para compilar os códigos utilizou-se o comando:
 ````
-gcc code.c -o bin_name
+g++ *.cpp -o main
 ````
 
 
