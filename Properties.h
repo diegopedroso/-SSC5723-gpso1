@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 
+// Class to read config file to set up MMU
 class Properties {
 private:
     std::multimap<std::string, std::string> content;
