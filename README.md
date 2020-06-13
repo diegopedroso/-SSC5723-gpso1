@@ -89,7 +89,7 @@ Com base nas Tabelas 1, 2 e 3, foram gerados alguns gráficos, com a finalidade 
 **Grafico 3 - Gráfico comparativo das operações do sistema de arquivos NTFS**
 
 
-Nota-se que, em todos os casos, conforme esperado, quanto maior a arquivo que a operacao tinha que manipular, maior seria o tempo. Porém todos os sistemas de arquivos tem uma boa performance até arquivos de 100M. A partir desses valores, os tempos de operação são de ordem exponenciais. 
+Nota-se que, em todos os casos, conforme esperado, quanto maior a arquivo que a operacao tinha que manipular, maior seria o tempo. Porém todos os sistemas de arquivos tem uma boa performance até arquivos de 100M. A partir desses valores, os tempos de operação são de ordem exponenciais. O desvio padrão tambem tende a ser maior entre as operações com arquivos maiores, pelo fato dessas operacoes levarem mais tempo, os recursos da máquina, bem como o sistema operacional, precisam lidar com outras operações que ocorrem de forma concorrente no sistema, o que explica um aumento considerável no tempo para operações com arquivos maiores que 10M.
 
 
 
@@ -102,7 +102,6 @@ Referências
 1. http://dubeyko.com/development/FileSystems/NTFS/ntfsdoc.pdf
 2. http://read.pudn.com/downloads77/ebook/294884/FAT32
 3. https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
-
 
 Contatos 
 -------------------
