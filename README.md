@@ -69,13 +69,13 @@ O nosso código executa um loop que escreve, le e remove, de forma automática. 
 Foram realizadas várias rodadas de testes com cada tipo de sistema de arquivos. A tabela abaixo mostra os valores coletados dos testes, esses valores foram sumarizados em média e desvio padrão. Cada experimento teve pelo menos, 40 rodadas de execução para cada um dos cenários apresentados.
 
 
-![stats](/assets/tabelas/ext4.png)
+![stats](/assets/tabelas/EXT4.png)
 **Tabela 1 - Tabela de dados do sistema de arquivos EXT4**
 
-![stats](/assets/tabelas/fat32.png)
+![stats](/assets/tabelas/FAT32.png)
 **Tabela 2 - Tabela de dados do sistema de arquivos FAT32**
 
-![stats](/assets/tabelas/ntfs.png)
+![stats](/assets/tabelas/NTFS.png)
 **Tabela 3 - Tabela de dados do sistema de arquivos NTFS**
 
 
