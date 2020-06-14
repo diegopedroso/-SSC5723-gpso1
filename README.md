@@ -56,11 +56,13 @@ O comando **dd** são as iniciais de Data Definition, é um utilitário de linha
 ````
 dd if=/dev/zero of=/media/linux/device/file.img bs=5k count=1
 ````
-Onde **if** é origem do arquivo, **of** o destino, **bs** é o tamanho do bloco, e **count** a quantidade de blocos. Aproveitando os isumos do primeiro módulo, utilizamos o comando **time** para aferir o tempo de leitura e destruição dos arquivos.
+Onde **if** é origem do arquivo, **of** o destino, **bs** é o tamanho do bloco, e **count** a quantidade de blocos. 
+
+Para a remoção de arquivo, foi-se utilizado o comando **rm**, que exclui um arquivo. E para a leitura, o comando **cat** foi usado. Esse comando concatena arquivos passados como argumento e exibe na saída padrão. Aproveitando os insumos do primeiro módulo, utilizamos o comando **time** para aferir o tempo de leitura e destruição dos arquivos.
 
 Como a linguagem de programação  não foi especificada, utilizamos o Shell do prompt de comando para fazer o loop de execução.
 
-O nosso código executa um loop que escreve, le e remove, de forma automática. Executando todas as rotinas de forma programada e com extrema consistência entre as execuções.
+O nosso código executa um loop que escreve, lê e remove, de forma automática. Executamos todas as rotinas de forma programada e com extrema consistência entre as execuções.
 
 
 ***Análise dos Dados***
